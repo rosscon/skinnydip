@@ -87,12 +87,16 @@ UP_BEEP = "M300 S1912 P95  ;upbeep\nM300 S3830 P95  ;upbeep\n" + \
           "M300 S5742 P195 ;upbeep\n"
 
 # REGULAR EXPRESSIONS*********************************************************
-OLD_INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}" + \
+OLD_OLD_INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}" + \
                    r"(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>" + \
                    r"G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1 E-).*\n" + \
                    r"(.*\n){1,5}(?P<new_tool>T\d)"
 
-INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1.*[^E].*\n)(?:.*\n){1,5}G4 S.*\n(?P<new_tool>T\d)\nG4 S.*\n"
+OLD_INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}(?P<dip_pos>G1.*[^E].*\n)(?:.*\n){1,5}G4 S.*\n(?P<new_tool>T\d)\nG4 S.*\n"
+
+INSERTIONS_REGEX = r"(?P<temp_pause>G1 E-.*\n)((G1 E-|M73).*\n){2,7}(M104 S(?P<filament_temp>.*)\n)?(?P<temp_restore>G1 [^E].*\n)(?:.*\n){1,20}?(?P<dip_pos>G1[^E\n]*\n)(?:.*\n){0,20}?G4 S.*\n(?:.*\n){0,5}(?P<new_tool>T\d)\n(?:.*\n){0,20}G4 S.*\n"
+
+
 TEMP_BEEP = ["M300 S3038 P155 ;temp_beep\n", "M300 S2550 P75 ;temp_beep\n"]
 
 CONFIGSTRING_REGEX = r"(SKINNYDIP CONFIGURATION START.?)(?P<configstring>.*)"
